@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#05070a">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <title>Hand Commands</title>
+  <style>
+    :root { --cyan:#61dcff; --bg:#05070a; --panel:rgba(5,7,10,.72); }
+    * { box-sizing:border-box; }
+    html,body { margin:0; width:100%; height:100%; overflow:hidden; background:var(--bg); color:#fff; font-family:system-ui,-apple-system,Segoe UI,sans-serif; }
+    #camera { position:fixed; inset:0; width:100%; height:100%; object-fit:cover; transform:scaleX(-1); }
+    #overlay { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; transform:scaleX(-1); }
+    #top { position:fixed; top:0; left:0; right:0; padding:16px; padding-top:calc(16px + env(safe-area-inset-top)); display:flex; justify-content:space-between; gap:12px; z-index:5; background:linear-gradient(#05070acc,transparent); }
+    .pill { background:var(--panel); border:1px solid #ffffff22; border-radius:999px; padding:9px 12px; font-size:12px; backdrop-filter:blur(8px); }
+    #state { color:var(--cyan); }
+    #cursor { position:fixed; width:30px; height:30px; border:2px solid var(--cyan); border-radius:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:6; box-shadow:0 0 18px #61dcff66; display:none; }
+    #cursor::after { content:""; position:absolute; inset:8px; border-radius:50%; background:var(--cyan); }
+    #start { position:fixed; inset:0; z-index:10; display:grid; place-items:center; padding:28px; background:var(--bg); }
+    .card { width:min(520px,100%); padding:28px; border:1px solid #ffffff18; border-radius:24px; background:var(--panel); text-align:center; }
+    h1 { margin:0 0 8px; font-size:30px; letter-spacing:3px; }
+    p { color:#b9c3ca; line-height:1.5; }
+    button { border:1px solid var(--cyan); background:transparent; color:var(--cyan); border-radius:12px; padding:14px 22px; font-weight:700; font-size:15px; }
+    #commands { position:fixed; left:12px; right:12px; bottom:12px; bottom:calc(12px + env(safe-area-inset-bottom)); z-index:5; display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+    .cmd { text-align:center; background:var(--panel); border:1px solid #ffffff16; border-radius:12px; padding:9px 5px; font-size:10px; color:#cbd4da; }
+    .cmd b { display:block; color:var(--cyan); font-size:15px; margin-bottom:2px; }
+    #log { position:fixed; top:62px; right:12px; width:min(260px,48vw); max-height:25vh; overflow:hidden; z-index:5; font:10px/1.4 ui-monospace,monospace; color:#b9c3ca; text-align:right; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <video id="camera" playsinline muted></video>
+  <canvas id="overlay"></canvas>
+  <div id="cursor"></div>
+  <div id="top"><div class="pill">HAND COMMANDS</div><div id="state" class="pill">CAMERA OFF</div></div>
+  <div id="log"></div>
+  <div id="commands">
+    <div class="cmd"><b>☝</b>POINT / CURSOR</div>
+    <div class="cmd"><b>1×</b>LEFT CLICK</div>
+    <div class="cmd"><b>2×</b>RIGHT CLICK</div>
+    <div class="cmd"><b>🤏</b>GRAB / DRAG</div>
+    <div class="cmd"><b>🖐</b>HOME</div>
+    <div class="cmd"><b>✊</b>BACK</div>
+  </div>
+  <div id="start">
+    <div class="card">
+      <h1>HAND COMMANDS</h1>
+      <p>Mobile front-camera hand tracking. Point, click, drag, Home and Back without touching the screen.</p>
+      <button id="startBtn">START FRONT CAMERA</button>
+      <p style="font-size:12px">Use Chrome on Android. Camera access requires HTTPS or localhost.</p>
+    </div>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
