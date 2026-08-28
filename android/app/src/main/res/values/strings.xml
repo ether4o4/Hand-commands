@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hand Commands</string>
+    <string name="accessibility_description">Turns Hand Commands gestures into Android input.</string>
+</resources>
